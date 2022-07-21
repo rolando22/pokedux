@@ -1,11 +1,15 @@
 import React from 'react';
-import { Searcher } from './components/Searcher';
+import { Col } from 'antd';
+import { Searcher, PokemonList } from './components';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Searcher />
+      <Col span={8} offset={8}>
+        <Searcher />
+      </Col>
+      <PokemonList />
     </div>
   );
 }
