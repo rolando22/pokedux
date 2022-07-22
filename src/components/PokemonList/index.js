@@ -6,7 +6,7 @@ function PokemonList ({ pokemons }) {
     return (
         <div className="PokemonList">
             {pokemons.map(pokemon => (
-                <PokemonCard />
+                <PokemonCard pokemon={pokemon} key={pokemon.name}/>
             ))}
         </div> 
     );
