@@ -1,34 +1,26 @@
+import { fromJS } from "immutable";
 import { actionTypes } from "../actions/types";
 
-const initialState = {
+const initialState = fromJS({
     pokemons: [],
     loading: false,
-};
+});
 
-const setFavorite = (state, payload) => {
-    const newPokemons = [...state.pokemons];
-    const currentPokemonIndex = newPokemons.findIndex(pokemon => pokemon.id === payload);
+const updateFavorite = (state, payload) => {
+    const currentPokemonIndex = state.get('pokemons').findIndex(
+        pokemon => pokemon.get('id') === payload
+    );
     if (currentPokemonIndex < 0) {
         return state;
     };
-    newPokemons[currentPokemonIndex].favorite = !newPokemons[currentPokemonIndex].favorite;
-    return {
-        ...state,
-        pokemons: newPokemons,
-    };
+    const favorite = state.getIn(['pokemons', currentPokemonIndex, 'favorite']);
+    return state.setIn(['pokemons', currentPokemonIndex, 'favorite'], !favorite);
 };
 
 const pokemonsReducerObj = (state, payload) => ({
-    [actionTypes.SET_POKEMONS]: {
-        ...state,
-        pokemons: payload,
-        loading: false,
-    },
-    [actionTypes.SET_FAVORITE]: setFavorite(state, payload),
-    [actionTypes.SET_LOADING]: {
-        ...state,
-        loading: true,
-    },
+    [actionTypes.SET_POKEMONS]: state.setIn(['pokemons'], fromJS(payload)).setIn(['loading'], false),
+    [actionTypes.SET_FAVORITE]: updateFavorite(state, payload),
+    [actionTypes.SET_LOADING]: state.setIn(['loading'], true),
 });
 
 const pokemonsReducer = (state = initialState, action) => (
