@@ -3,7 +3,6 @@ import { actionTypes } from "../actions/types";
 
 const initialState = fromJS({
     pokemons: [],
-    loading: false,
 });
 
 const updateFavorite = (state, payload) => {
@@ -18,9 +17,8 @@ const updateFavorite = (state, payload) => {
 };
 
 const pokemonsReducerObj = (state, payload) => ({
-    [actionTypes.SET_POKEMONS]: state.setIn(['pokemons'], fromJS(payload)).setIn(['loading'], false),
+    [actionTypes.SET_POKEMONS]: state.setIn(['pokemons'], fromJS(payload)),
     [actionTypes.SET_FAVORITE]: updateFavorite(state, payload),
-    [actionTypes.SET_LOADING]: state.setIn(['loading'], true),
 });
 
 const pokemonsReducer = (state = initialState, action) => (

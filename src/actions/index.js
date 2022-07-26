@@ -11,8 +11,9 @@ const setFavorite = (payload) => ({
     payload,
 });
 
-const setLoading = () => ({
+const setLoading = (payload) => ({
     type: actionTypes.SET_LOADING,
+    payload,
 });
 
 const getPokemonsWithDetails = (pokemons) => async (dispatch) => {
