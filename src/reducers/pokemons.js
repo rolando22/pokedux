@@ -2,12 +2,18 @@ import { actionTypes } from "../actions/types";
 
 const initialState = {
     pokemons: [],
+    loading: false,
 };
 
 const pokemonsReducerObj = (state, payload) => ({
     [actionTypes.SET_POKEMONS]: {
         ...state,
         pokemons: payload,
+        loading: false,
+    },
+    [actionTypes.SET_LOADING]: {
+        ...state,
+        loading: true,
     },
 });
 

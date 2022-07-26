@@ -6,9 +6,13 @@ const setPokemons = (payload) => ({
     payload,
 });
 
+const setLoading = () => ({
+    type: actionTypes.SET_LOADING,
+});
+
 const getPokemonsWithDetails = (pokemons) => async (dispatch) => {
     const pokemonsDetailed = await Promise.all(pokemons.map(pokemon => getPokemonsDetails(pokemon)));
     dispatch(setPokemons(pokemonsDetailed));
 };
 
-export { setPokemons, getPokemonsWithDetails };
+export { setPokemons, setLoading, getPokemonsWithDetails };
