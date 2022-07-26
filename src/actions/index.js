@@ -6,6 +6,11 @@ const setPokemons = (payload) => ({
     payload,
 });
 
+const setFavorite = (payload) => ({
+    type: actionTypes.SET_FAVORITE,
+    payload,
+});
+
 const setLoading = () => ({
     type: actionTypes.SET_LOADING,
 });
@@ -15,4 +20,4 @@ const getPokemonsWithDetails = (pokemons) => async (dispatch) => {
     dispatch(setPokemons(pokemonsDetailed));
 };
 
-export { setPokemons, setLoading, getPokemonsWithDetails };
+export { setPokemons, setFavorite, setLoading, getPokemonsWithDetails };
