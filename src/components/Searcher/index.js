@@ -2,9 +2,13 @@ import React from "react";
 import { Input } from "antd";
 import "./Searcher.css";
 
-function Searcher () {
+function Searcher ({ searchValue, onChange }) {
     return (
-        <Input.Search placeholder="Buscar..." />
+        <Input.Search
+            placeholder="Buscar..."
+            value={searchValue}
+            onChange={onChange}
+        />
     );
 };
 

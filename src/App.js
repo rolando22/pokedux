@@ -2,18 +2,23 @@ import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Col, Spin } from 'antd';
 import { Searcher, PokemonList } from './components';
-import { fetchPokemonsWithDetails } from './slices/dataSlice';
+import { fetchPokemonsWithDetails, searchedPokemons } from './slices/dataSlice';
 import logoPokedux from "./statics/logo.svg";
 import './App.css';
 
 function App() {
-  const pokemons = useSelector(state => state.data.pokemons, shallowEqual);
+  const pokemons = useSelector(state => state.data.searchedPokemons, shallowEqual);
   const loading = useSelector(state => state.ui.loading);
   const dispatch = useDispatch();
+  let searchValue;
 
   useEffect(() => {
     dispatch(fetchPokemonsWithDetails());
   }, []);
+
+  const handleSearchePokemons = (event) => {
+    dispatch(searchedPokemons(event.target.value));
+  };
 
   return (
     <div className="App">
@@ -21,7 +26,10 @@ function App() {
         <img src={logoPokedux} alt="logoPokedux"/>
       </Col>
       <Col span={8} offset={8}>
-        <Searcher />
+        <Searcher
+          searchValue={searchValue}
+          onChange={handleSearchePokemons}
+        />
       </Col>
       {loading ? (
         <Col offset={12}>
